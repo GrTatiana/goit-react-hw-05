@@ -11,7 +11,23 @@ const options = {
   },
 };
 
+const url1 = "https://api.themoviedb.org/3/trending/movie/day?language=en-US";
+const options1 = {
+  headers: {
+    accept: "application/json",
+    Authorization: "Bearer 7ad9bf3dee8402edfe9cc8b88bcdfb72",
+  },
+};
+
 axios
   .get(url, options)
   .then((response) => console.log(response))
   .catch((err) => console.error(err));
+
+export const getMovies = () => {
+  return movies;
+};
+
+export const getMoviesById = (moviesId) => {
+  return movies.find((movies) => movies.id === moviesId);
+};
