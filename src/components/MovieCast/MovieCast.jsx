@@ -1,4 +1,7 @@
+import { useParams } from "react-router-dom";
 const MovieCast = () => {
-  return <div></div>;
+  const { movieId } = useParams();
+  return <div> Movie cast:{movieId}.</div>;
 };
+
 export default MovieCast;

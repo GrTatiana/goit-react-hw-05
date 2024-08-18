@@ -9,7 +9,6 @@ const Navigation = () => {
     <div>
       <header className={css.header}>
         <div className={css.box}>
-          <BiSolidMoviePlay size="100px" />
           <nav>
             <ul className={css.nav}>
               <li>
@@ -34,6 +33,7 @@ const Navigation = () => {
               </li>
             </ul>
           </nav>
+          <BiSolidMoviePlay size="100px" />
         </div>
       </header>
     </div>

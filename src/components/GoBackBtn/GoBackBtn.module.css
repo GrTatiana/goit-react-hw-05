@@ -1,0 +1,17 @@
+.linkBtn {
+  position: absolute;
+  font-size: 18px;
+  font-weight: 900;
+  padding: 15px;
+  margin: 0 auto;
+  top: 160px;
+  left: 1%;
+  background-color: transparent;
+  border: 2px solid blue;
+  border-radius: 6px;
+}
+.linkBtn:hover,
+.linkBtn:focus {
+  background-color: blue;
+  color: aliceblue;
+}
