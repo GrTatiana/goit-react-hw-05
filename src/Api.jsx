@@ -11,6 +11,13 @@ export const fetchTrendingMovies = async () => {
   const response = await axios.get(url);
   return response.data.results;
 };
+export const fetchMovie = async (movieId) => {
+  const apiKey = "7ad9bf3dee8402edfe9cc8b88bcdfb72";
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`;
+  const response = await axios.get(url);
+
+  return country[0];
+};
 // https://api.themoviedb.org/3/movie/${movieId}/credits
 
 // const options = {

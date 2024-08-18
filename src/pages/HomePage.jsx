@@ -29,7 +29,6 @@ const HomePage = () => {
   console.log({ movies });
   return (
     <>
-      <h1 style={{ color: "black" }}>Trending movies</h1>
       {movies.length > 0 && <MovieList movies={movies} />}
       {isLoading && <Loader />}
       {error && toast.error("This is an error!")}
