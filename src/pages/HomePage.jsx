@@ -16,7 +16,6 @@ const HomePage = () => {
       setError(null);
       try {
         const data = await fetchTrendingMovies();
-        console.log(fetchTrendingMovies());
         setMovies(data);
       } catch (error) {
         setError(error);
@@ -26,12 +25,11 @@ const HomePage = () => {
     };
     fetchData();
   }, []);
-  console.log({ movies });
   return (
     <>
       {movies.length > 0 && <MovieList movies={movies} />}
       {isLoading && <Loader />}
-      {error && toast.error("This is an error!")}
+      {error && toast.error("ERROR!")}
       <Toaster />
     </>
   );
