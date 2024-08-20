@@ -1,26 +1,17 @@
 import { useEffect, useState } from "react";
-import css from "./MovieDetailsPage/MovieDetailsPage.module.css";
 import SearchForm from "../components/SearchForm/SearchForm";
-import GoBackBtn from "../components/GoBackBtn/GoBackBtn";
 import Loader from "../components/Loader/Loader";
-import MovieInfo from "../components/MoviInfo/MoviInfo";
 import toast, { Toaster } from "react-hot-toast";
-import {
-  NavLink,
-  Outlet,
-  useLocation,
-  useSearchParams,
-} from "react-router-dom";
-import clsx from "clsx";
 import { fetchMovieSearch } from "../Api";
+import MovieList from "../components/MovieList/MovieList";
+import { useSearchParams } from "react-router-dom";
 
 const MoviesPage = () => {
-  const [movie, setMovie] = useState(null); // Використання одного об'єкта для зберігання фільму
+  const [movies, setMovies] = useState(null);
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(null);
   const [searchParam, setSearchParam] = useSearchParams();
   const query = searchParam.get("query");
-  const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,12 +23,11 @@ const MoviesPage = () => {
       try {
         setLoader(true);
         const data = await fetchMovieSearch(query);
-        const getMovieData =
-          data.results && data.results.length > 0 ? data.results[0] : null;
-        if (getMovieData) {
-          setMovie(getMovieData);
+        const getMovieData = data.results;
+        if (getMovieData.length > 0) {
+          setMovies(getMovieData);
         } else {
-          setTimeout(setError("No found movie"), 3000);
+          setError("No found movie");
         }
       } catch (error) {
         setError(error.message);
@@ -56,43 +46,10 @@ const MoviesPage = () => {
   return (
     <div>
       <SearchForm onSubmit={handleSubmit} />
-
-      {movie && (
-        <GoBackBtn path={location.state?.from ?? "/"}>
-          Go back to list
-        </GoBackBtn>
-      )}
-      {movie && <MovieInfo {...movie} />}
+      {movies && <MovieList movies={movies} />}
       {loader && <Loader />}
       {error && toast.error(error)}
       <Toaster />
-      {movie && (
-        <ul className={css.castrew}>
-          <li>
-            <NavLink
-              to="cast"
-              className={({ isActive }) =>
-                clsx(css.link, isActive && css.active)
-              }
-            >
-              Movie cast
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="reviews"
-              className={({ isActive }) =>
-                clsx(css.link, isActive && css.active)
-              }
-            >
-              Movie reviews
-            </NavLink>
-          </li>
-        </ul>
-      )}
-      <div>
-        <Outlet />
-      </div>
     </div>
   );
 };
