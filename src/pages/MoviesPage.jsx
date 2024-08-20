@@ -46,7 +46,7 @@ const MoviesPage = () => {
   return (
     <div>
       <SearchForm onSubmit={handleSubmit} />
-      {movies && <MovieList movies={movies} />}
+      {movies && <MovieList movies={movies} title="Search results" />}
       {loader && <Loader />}
       {error && toast.error(error)}
       <Toaster />

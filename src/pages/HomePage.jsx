@@ -27,7 +27,9 @@ const HomePage = () => {
   }, []);
   return (
     <>
-      {movies.length > 0 && <MovieList movies={movies} />}
+      {movies.length > 0 && (
+        <MovieList movies={movies} title="Trending movies" />
+      )}
       {isLoading && <Loader />}
       {error && toast.error("ERROR!")}
       <Toaster />
